@@ -9,8 +9,50 @@
     <parent link="robot_footprint"/>
     <child link="chassis" />
   </joint>
+  
+
 
   <link name='chassis'>
+ 
+
+   
+  <!--  left wheel joint -->
+  <joint type="continuous" name="left_wheel_hinge">
+    <origin xyz="0 0.15 0" rpy="0 0 0"/>
+    <child link="left_wheel"/>
+    <parent link="chassis"/>
+    <axis xyz="0 0.125 0" rpy="0 0 0"/>
+    <limit effort="10000" velocity="1000"/>
+    <dynamics damping="1.0" friction="1.0"/>
+  </joint>
+  
+  <!--  right wheel joint -->
+   <joint type="continuous" name="right_wheel_hinge">
+    <origin xyz="0 -0.125 0" rpy="0 0 0"/>
+    <child link="right_wheel"/>
+    <parent link="chassis"/>
+    <axis xyz="0 1 0" rpy="0 0 0"/>
+    <limit effort="10000" velocity="1000"/>
+    <dynamics damping="1.0" friction="1.0"/>
+  </joint>
+  
+  <!--  camera joint -->
+  <joint type="fixed" name="camera_joint">
+    <origin xyz="0.2 0 0" rpy="0 0 0"/>
+    <child link="camera"/>
+    <parent link="chassis"/>
+  </joint>
+  
+  <!--  hokuyo joint -->
+   <joint type="fixed" name="camera_joint">
+    <origin xyz="0.15 0 0.1" rpy="0 0 0"/>
+    <child link="hokuyo"/>
+    <parent link="chassis"/>
+  </joint>
+
+  
+  
+  
     <pose>0 0 0.1 0 0 0</pose>
 
     <inertial>
@@ -65,8 +107,138 @@
         <sphere radius="0.05"/>
       </geometry>
     </visual>
+    
+    
+      <!--  right wheel -->
+    <collision name='right_wheel'>
+     <origin xyz="0 -0.125 0" rpy= "0 1.5707 1.5707"/>
+      <geometry>
+        <cylinder radius="0.1" length="0.05"/>
+      </geometry>
+    </collision>
+    
+    <visual name="right_wheel">
+		<origin xyz="0 -0.125 0" rpy= "0 1.5707 1.5707"/>
+    		<geometry>
+    			<cylinder radius="0.1" length="0.05"/>
+   			 </geometry>
+	</visual>
+    
+     <inertia name ="right_wheel">
+    
+        <mass>"5"</mass>
+        <inertia>
+        	<ixx>"0.1"</ixx>
+            <ixy>"0"</ixy>
+            <ixz>"0"</ixz>
+            <iyy>"0.1"</iyy>
+            <iyz>"0"</iyz>
+            <izz>"0.1"</izz>
+        </inertia>
+    </inertia>
+    
+    <!--  left wheel -->
+    
+    <collision name='left_wheel'>
+     <origin xyz="0 0.125 0" rpy= "0 1.5707 1.5707"/>
+      <geometry>
+        <cylinder radius="0.1" length="0.05"/>
+        
+      </geometry>
+    </collision>
+    
+    <visual name="left_wheel">
+		<origin xyz="0 0.125 0" rpy= "0 1.5707 1.5707"/>
+    		<geometry>
+    			<cylinder radius="0.1" length="0.05"/>
+                 
+   			 </geometry> 
+             
+	</visual>
+    
+   
+    
+     <inertia name ="left_wheel">
+    
+        <mass>"5"</mass>
+        <inertia>
+        	<ixx>"0.1"</ixx>
+            <ixy>"0"</ixy>
+            <ixz>"0"</ixz>
+            <iyy>"0.1"</iyy>
+            <iyz>"0"</iyz>
+            <izz>"0.1"</izz>
+        </inertia>
+    </inertia>
+    
+    
+      <!--  camera -->
+    <collision name='camera'>
+     <origin xyz="0 0.125 0" rpy= "0 1.5707 1.5707"/>
+      <geometry>
+        <box size="0.05 0.05 0.05"/>
+      </geometry>
+    </collision>
+    
+    <visual name="camera">
+		<origin xyz="0.2 0 0" rpy= "0 0 0"/>
+    		<geometry>
+    			<box size="0.05 0.05 0.05"/>
+   			 </geometry>          
+	</visual>
+    
+    <inertia name ="camera">
+    
+        <mass>"0.1"</mass>
+        <inertia>
+        	<ixx>"1e-6"</ixx>
+            <ixy>"0"</ixy>
+            <ixz>"0"</ixz>
+            <iyy>"1e-6"</iyy>
+            <iyz>"0"</iyz>
+            <izz>"1e-6"</izz>
+        </inertia>
+    </inertia>
+    
+    
+    <!-- Hokuyo -->
+    
+    <collision name='hokuyo'>
+     <origin xyz="0 0 0" rpy= "0 0 0"/>
+      <geometry>
+        <box size="0.1 0.1 0.1"/>
+      </geometry>
+    </collision>
+    
+    <visual name="hokuyo">
+		<origin xyz="0 0 0" rpy= "0 0 0"/>
+    		<geometry>
+    			<box size="0.1 0.1 0.1"/>
+   			 </geometry>          
+	</visual>
+    
+    <inertia name="hokuyo">    
+        <mass>"1e-5"</mass>
+        <inertia>
+            <ixx>"1e-6"</ixx>
+            <ixy>"0"</ixy>
+            <ixz>"0"</ixz>
+            <iyy>"1e-6"</iyy>
+            <iyz>"0"</iyz>
+            <izz>"1e-6"</izz>
+        </inertia>
+    </inertia>
+    
+    
+     
+   
+   
+    
 
   </link>
+
+  	
+  
 
 </robot>
 
